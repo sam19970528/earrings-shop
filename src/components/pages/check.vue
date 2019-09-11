@@ -17,7 +17,15 @@
           <div class="py-3 mt-3 bg-light">
             <h1 class="text-center">您的購物清單</h1>
           </div>
-          <h2 v-if="cart.total==0" class="text-center text-danger">尚未選購商品</h2>
+          <div>
+            <div class="row justify-content-center">
+              <h2 v-if="cart.total==0" class="text-danger mr-3">尚未選購商品</h2>
+              <router-link to="/allproducts" v-if="cart.total==0" class="btn btn-info">
+                <span>回商品頁</span>
+              </router-link>
+            </div>
+          </div>
+
           <div class="mt-3">
             <div class="row" v-for="item in cart.carts" :key="item.id">
               <div class="col-lg-6 align-self-center">
@@ -194,7 +202,7 @@ export default {
     ...mapGetters(["cart", "length"])
   },
   methods: {
-    ...mapActions(["getCart", "delCart",]),
+    ...mapActions(["getCart", "delCart"]),
     addCoupon() {
       this.$store.dispatch("addCoupon", this.cuponcode);
     },
@@ -202,8 +210,8 @@ export default {
       this.$validator.validate().then(result => {
         if (result) {
           const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
-          const vm=this;
-          this.$store.state.isLoading=true;
+          const vm = this;
+          this.$store.state.isLoading = true;
           this.$http
             .post(
               api,
@@ -214,7 +222,7 @@ export default {
             )
             .then(res => {
               if (res.data.success) {
-                this.$store.state.isLoading=false;
+                this.$store.state.isLoading = false;
                 vm.getCart();
                 console.log(res.data);
                 vm.$router.push(`/cart/checkorder/${res.data.orderId}`); //orderId是送出訂單的id
