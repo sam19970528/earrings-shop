@@ -1,11 +1,11 @@
 <template>
   <div class="mt-4">
-    <h2 class="text-center wow fadeInLeft" data-wow-duration='2s'>精選商品</h2>
-    <h2 class="text-center  wow fadeInLeft" data-wow-duration='2s'>
-      <i class="material-icons font-weight-bolder" >maximize</i>
+    <h2 class="text-center wow fadeInLeft" data-wow-duration="2s">精選商品</h2>
+    <h2 class="text-center wow fadeInLeft" data-wow-duration="2s">
+      <i class="material-icons font-weight-bolder">maximize</i>
     </h2>
     <div class="container">
-      <div class="row wow fadeInUp" data-wow-duration='2s'>
+      <div class="row wow fadeInUp" data-wow-duration="2s">
         <swiper :options="swiperOption">
           <swiper-slide v-for="item in products" :key="item.id">
             <div class="card border-0">
@@ -124,11 +124,14 @@ export default {
   methods: {
     ...mapActions(["getProducts", "getProduct", "addCart"]),
     clickCart(id, qty = 1) {
+      this.$bus.$emit("message:push", "已加入購物車", "success");
       this.addCart({ id, qty });
     }
   },
-  mounted(){
-    { new WOW({live:false}).init() }
+  mounted() {
+    {
+      new WOW({ live: false }).init();
+    }
   },
   created() {
     this.getProducts();

@@ -1,6 +1,7 @@
 <template>
   <div>
     <navbar2 />
+    <Alert/>
     <background />
     <indexContent/>
     <indexItem />
@@ -11,6 +12,7 @@
 import navbar2 from "./navbar2";
 import background from "./background";
 import indexContent from "./index-content";
+import Alert from "./alert";
 import indexItem from "./index-item";
 import indexFooter from "./index-footer";
 
@@ -20,7 +22,8 @@ export default {
     background,
     indexContent,
     indexItem,
-    indexFooter
+    indexFooter,
+    Alert
   },
 };
 </script>

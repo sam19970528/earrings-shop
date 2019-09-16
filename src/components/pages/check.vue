@@ -56,7 +56,7 @@
                 <div class="row mb-2">
                   <div class="col-6">
                     <span class="mr-3">選購數量:{{item.qty}}</span>
-                    <a href="#" @click.prevent="delCart(item.id)">
+                    <a href="#" @click.prevent="clickdelCart(item.id)">
                       <i class="fas fa-trash-alt text-danger"></i>
                     </a>
                   </div>
@@ -95,7 +95,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6">
+        <div v-if="length!=0" class="col-lg-6">
           <div class="py-3 mt-3 bg-light">
             <h2 class="text-center">填寫資料</h2>
             <form @submit.prevent="createOrder">
@@ -203,6 +203,10 @@ export default {
   },
   methods: {
     ...mapActions(["getCart", "delCart"]),
+    clickdelCart(id){
+      this.delCart(id)
+      this.$bus.$emit("message:push", "已刪除商品!", "warning");
+    },
     addCoupon() {
       this.$store.dispatch("addCoupon", this.cuponcode);
     },

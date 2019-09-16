@@ -15,6 +15,7 @@ import zhTWValidate from 'vee-validate/dist/locale/zh_TW'
 import App from './App.vue'
 import store from './store'
 import 'animate.css'
+import './bus';
 import router from './router'
 import filtercurrency from './filters/currency'
 

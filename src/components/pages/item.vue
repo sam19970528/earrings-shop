@@ -1,6 +1,7 @@
 <template>
   <div>
     <navbar3 />
+    <Alert/>
     <div class="container">
       <div class="row mt-10">
         <div class="col-md-7 bg-img" :style="{backgroundImage: `url(${product.imageUrl})`}"></div>
@@ -42,6 +43,7 @@
 <script>
 import {mapGetters,mapActions} from 'vuex';
 import navbar3 from "../navbar3";
+import Alert from '../alert';
 import indexFooter from "../index-footer";
 export default {
   data() {
@@ -52,7 +54,8 @@ export default {
   },
   components: {
     navbar3,
-    indexFooter
+    indexFooter,
+    Alert
   },
   computed: {
     ...mapGetters(['product'])
@@ -63,6 +66,7 @@ export default {
      this.$store.dispatch('getProduct',this.Id)
    },
     clickCart(id, qty = 1) {
+      this.$bus.$emit("message:push", "已加入購物車", "success");
       this.addCart({id,qty})
     }
   },

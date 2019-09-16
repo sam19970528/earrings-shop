@@ -80,6 +80,7 @@ export default {
       ...mapActions(['getProducts','getProduct','addCart']),
     clickCart(id, qty = 1) {
         this.addCart({id,qty});
+        this.$bus.$emit("message:push", "已加入購物車", "success");
     }
   },
   computed: {
